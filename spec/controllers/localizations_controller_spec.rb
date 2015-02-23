@@ -103,14 +103,16 @@ RSpec.describe LocalizationsController, :type => :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { path: "pt-BR.views.users.show", value: "Ver Usuário", locale: "pt-BR" }
       }
 
       it "updates the requested localization" do
         localization = Localization.create! valid_attributes
         put :update, {:id => localization.to_param, :localization => new_attributes}, valid_session
         localization.reload
-        skip("Add assertions for updated state")
+        expect(localization.locale).to eq("pt-BR")
+        expect(localization.value).to eq("Ver Usuário")
+        expect(localization.path).to eq("pt-BR.views.users.show")
       end
 
       it "assigns the requested localization as @localization" do
