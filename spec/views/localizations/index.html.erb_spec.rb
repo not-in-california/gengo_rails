@@ -9,7 +9,7 @@ RSpec.describe "localizations/index", :type => :view do
         :locale => "Locale"
       ),
       Localization.create!(
-        :path => "Path",
+        :path => "other.Path",
         :value => "Value",
         :locale => "Locale"
       )
@@ -18,7 +18,8 @@ RSpec.describe "localizations/index", :type => :view do
 
   it "renders a list of localizations" do
     render
-    assert_select "tr>td", :text => "Path".to_s, :count => 2
+    assert_select "tr>td", :text => "Path".to_s, :count => 1
+    assert_select "tr>td", :text => "other.Path".to_s, :count => 1
     assert_select "tr>td", :text => "Value".to_s, :count => 2
     assert_select "tr>td", :text => "Locale".to_s, :count => 2
   end

@@ -5,5 +5,6 @@ RSpec.describe Localization, :type => :model do
     it { should validate_presence_of(:path) }
     it { should validate_presence_of(:value) }
     it { should validate_presence_of(:locale) }
+    it { should validate_uniqueness_of(:path).scoped_to(:locale) }
   end
 end
