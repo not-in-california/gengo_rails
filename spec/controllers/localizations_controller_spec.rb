@@ -24,11 +24,11 @@ RSpec.describe LocalizationsController, :type => :controller do
   # Localization. As you add validations to Localization, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { path: "en.views.users.show", value: "Show User", locale: "en" }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { path: "", value: "", locale: ""}
   }
 
   # This should return the minimal set of values that should be in the session
