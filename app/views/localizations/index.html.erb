@@ -1,0 +1,27 @@
+<h1>Listing localizations</h1>
+
+<table>
+  <tr>
+    <th>Path</th>
+    <th>Value</th>
+    <th>Locale</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @localizations.each do |localization| %>
+  <tr>
+    <td><%= localization.path %></td>
+    <td><%= localization.value %></td>
+    <td><%= localization.locale %></td>
+    <td><%= link_to 'Show', localization %></td>
+    <td><%= link_to 'Edit', edit_localization_path(localization) %></td>
+    <td><%= link_to 'Destroy', localization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Localization', new_localization_path %>

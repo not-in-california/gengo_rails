@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Path:</b>
+  <%= @localization.path %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @localization.value %>
+</p>
+
+<p>
+  <b>Locale:</b>
+  <%= @localization.locale %>
+</p>
+
+
+<%= link_to 'Edit', edit_localization_path(@localization) %> |
+<%= link_to 'Back', localizations_path %>
