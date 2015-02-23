@@ -80,4 +80,17 @@ class LocalizationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def import
+    localizations_list.each do |localization|
+      Localization.create(localization)
+    end
+    redirect_to localizations_path
+  end
+  
+  private
+  
+  def localizations_list
+    params[:localizations_list] || []
+  end
 end

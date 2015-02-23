@@ -157,5 +157,69 @@ RSpec.describe LocalizationsController, :type => :controller do
       expect(response).to redirect_to(localizations_url)
     end
   end
+  
+  describe "POST #import" do
+    context "with valid params" do
+      before do
+        @object_list = []
+        3.times { |i| @object_list << { path: "path.#{i}", value: "Value #{i}", locale: "en" } }
+      end
+    
+      it "should save all objects in database" do
+        expect { post :import, localizations_list: @object_list }.to change { Localization.count }.by(3)
+      end
+    
+      it "should redirect to localizations list" do
+        post :import, localizations_list: @object_list
+        expect(response).to redirect_to(localizations_url)
+      end
+    end
+    
+    context "with invalid data" do
+      before do
+        @object_list = []
+        3.times { |i| @object_list << { path: "path.#{i}", value: "Value #{i}", locale: "" } }
+      end
+    
+      it "should save all objects in database" do
+        expect { post :import, localizations_list: @object_list }.to change { Localization.count }.by(0)
+      end
+    
+      it "should redirect to localizations list" do
+        post :import, localizations_list: @object_list
+        expect(response).to redirect_to(localizations_url)
+      end
+    end 
+    
+    context "with duplicated data" do
+      before do
+        @object_list = []
+        3.times do |i| 
+          @object_list << { path: "path.#{i}", value: "Value #{i}", locale: "en" }
+          @object_list << { path: "path.#{i}", value: "Value #{i}", locale: "en" }
+        end
+      end
+    
+      it "should save all objects in database" do
+        expect { post :import, localizations_list: @object_list }.to change { Localization.count }.by(3)
+      end
+    
+      it "should redirect to localizations list" do
+        post :import, localizations_list: @object_list
+        expect(response).to redirect_to(localizations_url)
+      end
+    end 
+    
+    context "with no data" do
+      it "should save no objects in database" do
+        expect { post :import }.to change { Localization.count }.by(0)
+      end
+    
+      it "should redirect to localizations list" do
+        post :import
+        expect(response).to redirect_to(localizations_url)
+      end
+    end
+  end
 
 end

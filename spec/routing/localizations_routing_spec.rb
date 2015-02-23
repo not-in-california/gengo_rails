@@ -30,6 +30,10 @@ RSpec.describe LocalizationsController, :type => :routing do
     it "routes to #destroy" do
       expect(:delete => "/localizations/1").to route_to("localizations#destroy", :id => "1")
     end
+    
+    it "routes to #import" do
+      expect(:post => "/localizations/import").to route_to("localizations#import")
+    end
 
   end
 end
