@@ -33,12 +33,14 @@ RSpec.describe TranslationPackage, type: :model do
   end
   
   describe "#send_to_gengo" do
-    context "when request is ok"
+    context "when request is ok" do
       before do
         @localization = FactoryGirl.create(:localization, locale: "de")
         @localization2 = FactoryGirl.create(:localization, locale: "de", value: "other value")
         @translation_package = TranslationPackage.create([@localization.id, @localization2.id])
-        @translation_package.send_to_gengo
+        VCR.use_cassette("translation_package/send_to_gengo") do
+          @translation_package.send_to_gengo
+        end
       end
     
       it "change job status" do
