@@ -1,4 +1,5 @@
 require "gengo"
+require "localization_factory"
 
 module GengoRails
   class Engine < ::Rails::Engine
