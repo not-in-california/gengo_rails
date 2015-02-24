@@ -82,9 +82,7 @@ class LocalizationsController < ApplicationController
   end
   
   def import
-    localizations_list.each do |localization|
-      Localization.create(localization)
-    end
+    @localization_factory = LocalizationFactory.from_list(localizations_list)
     redirect_to localizations_path
   end
   
