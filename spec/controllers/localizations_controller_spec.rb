@@ -171,7 +171,7 @@ RSpec.describe LocalizationsController, :type => :controller do
     
       it "should redirect to localizations list" do
         post :import, localizations_list: @object_list
-        expect(response).to redirect_to(localizations_url)
+        expect(response).to render_template("import")
       end
     end
     
@@ -187,7 +187,7 @@ RSpec.describe LocalizationsController, :type => :controller do
     
       it "should redirect to localizations list" do
         post :import, localizations_list: @object_list
-        expect(response).to redirect_to(localizations_url)
+        expect(response).to render_template("import")
       end
     end 
     
@@ -206,7 +206,7 @@ RSpec.describe LocalizationsController, :type => :controller do
     
       it "should redirect to localizations list" do
         post :import, localizations_list: @object_list
-        expect(response).to redirect_to(localizations_url)
+        expect(response).to render_template("import")
       end
     end 
     
@@ -217,7 +217,7 @@ RSpec.describe LocalizationsController, :type => :controller do
     
       it "should redirect to localizations list" do
         post :import
-        expect(response).to redirect_to(localizations_url)
+        expect(response).to render_template("import")
       end
     end
   end

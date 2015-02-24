@@ -1,22 +1,22 @@
 class LocalizationFactory
-  def valid_localizations
-    @valid_localizations ||= []
+  attr_reader :valid_localizations, :invalid_localizations, :localizations
+  
+  def initialize
+    @valid_localizations = []
+    @invalid_localizations = []
+    @localizations = []
   end
   
-  def invalid_localizations
-    @invalid_localizations ||= []
-  end
-  
-  def self.from_list(list)
-    obj = self.new
+  def from_list(list)
+    @localizations = list
     list.each do |localization|
       l = Localization.new(localization)
       if l.save
-        obj.valid_localizations << l
+        valid_localizations << l
       else
-        obj.invalid_localizations << l
+        invalid_localizations << l
       end
     end
-    return obj
+    return self
   end
 end

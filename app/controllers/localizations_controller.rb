@@ -82,8 +82,7 @@ class LocalizationsController < ApplicationController
   end
   
   def import
-    @localization_factory = LocalizationFactory.from_list(localizations_list)
-    redirect_to localizations_path
+    @localization_factory = LocalizationFactory.new.from_list(localizations_list)
   end
   
   private

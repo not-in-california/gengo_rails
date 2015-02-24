@@ -20,7 +20,11 @@ RSpec.describe LocalizationFactory do
   
   describe "from_list" do
     before do
-      @localization_factory = LocalizationFactory.from_list(@localizations_list)
+      @localization_factory = LocalizationFactory.new.from_list(@localizations_list)
+    end
+    
+    it "should assign all passed localizations" do
+      expect(@localization_factory.localizations).to eq(@localizations_list)
     end
     
     it "should create all of the five valid_localizations" do
