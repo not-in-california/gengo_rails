@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150223214336) do
+ActiveRecord::Schema.define(:version => 20150224194103) do
 
   create_table "localizations", :force => true do |t|
     t.string   "path"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20150223214336) do
     t.string   "locale"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "job_id"
+    t.string   "status"
   end
 
 end
