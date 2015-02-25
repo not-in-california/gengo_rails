@@ -4,4 +4,35 @@
 <% end %>
 
 <p>In order to import files, you need to send them in the following format:</p>
-<p><%= [{ value: "Value", path: "path.to.some.where", locale: "en" }].to_json %></p>
+<p><%= { localizations_list: [{ value: "Value", path: "path.to.some.where", locale: "en" }]}.to_json %></p>
+
+<div class="result">
+</div>
+
+<script>
+  $('#test_import_submit').click(function(event) {
+    event.preventDefault();
+    var localizationsList = $('#localizations_list').val();
+    $.ajax({
+      type: "POST",
+      url: '<%= import_localizations_url %>',
+      contentType: 'application/json',
+      accept: 'text/html',
+      data: localizationsList,
+      dataType: 'json',
+      success: function(data) {
+        $('.result').html(data);
+      }
+    })
+      .done(function (data) {
+        result = 'Tried to import ' + data.localizations.length + '. ';
+        result += 'Succesfull: ' + data.valid_localizations.length + '. ';
+        result += 'Failed: ' + data.invalid_localizations.length + '. ';
+        $('.result').text(result);
+        
+        setTimeout(function(){
+          $('.result').text('');
+        }, 5000);
+      });
+  });
+</script>

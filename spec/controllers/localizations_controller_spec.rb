@@ -171,7 +171,9 @@ RSpec.describe LocalizationsController, :type => :controller do
     
       it "should redirect to localizations list" do
         post :import, localizations_list: @object_list
-        expect(response).to render_template("import")
+        expect(response.body).to match(/localizations/)
+        expect(response.body).to match(/valid_localizations/)
+        expect(response.body).to match(/invalid_localizations/)
       end
     end
     
@@ -183,11 +185,6 @@ RSpec.describe LocalizationsController, :type => :controller do
     
       it "should save all objects in database" do
         expect { post :import, localizations_list: @object_list }.to change { Localization.count }.by(0)
-      end
-    
-      it "should redirect to localizations list" do
-        post :import, localizations_list: @object_list
-        expect(response).to render_template("import")
       end
     end 
     
@@ -203,21 +200,11 @@ RSpec.describe LocalizationsController, :type => :controller do
       it "should save all objects in database" do
         expect { post :import, localizations_list: @object_list }.to change { Localization.count }.by(3)
       end
-    
-      it "should redirect to localizations list" do
-        post :import, localizations_list: @object_list
-        expect(response).to render_template("import")
-      end
     end 
     
     context "with no data" do
       it "should save no objects in database" do
         expect { post :import }.to change { Localization.count }.by(0)
-      end
-    
-      it "should redirect to localizations list" do
-        post :import
-        expect(response).to render_template("import")
       end
     end
   end

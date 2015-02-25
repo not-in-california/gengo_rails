@@ -12,9 +12,9 @@ class LocalizationFactory
     list.each do |localization|
       l = Localization.new(localization)
       if l.save
-        valid_localizations << l
+        @valid_localizations << l
       else
-        invalid_localizations << l
+        @invalid_localizations << l
       end
     end
     return self

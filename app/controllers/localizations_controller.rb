@@ -83,6 +83,8 @@ class LocalizationsController < ApplicationController
   
   def import
     @localization_factory = LocalizationFactory.new.from_list(localizations_list)
+    
+    render json: @localization_factory.to_json
   end
   
   private
