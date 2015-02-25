@@ -209,4 +209,20 @@ RSpec.describe LocalizationsController, :type => :controller do
     end
   end
 
+  describe "POST #update_job" do
+    context "status is approved" do
+      before do
+        @localization = FactoryGirl.create(:localization, job_id: "1298342")
+        post(:update_job, job: {job_id: "1298342", body_src: "other value", lc_src: "en", lc_tgt: "de", unit_count: "2", tier: "standard", credits: "0.10", status: "approved", eta: -1, ctime: 1424894043, callback_url: "http:\/\/requestb.in\/1mscujf1", auto_approve: "1", body_tgt: "anderen Wert"}, format: :json)
+      end
+
+      it "should return 200" do
+        expect(response.status).to eql 200
+      end
+
+      it "should change localization status" do
+        expect(@localization.reload.status).to eql "approved"
+      end
+    end
+  end
 end

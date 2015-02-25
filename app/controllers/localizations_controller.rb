@@ -87,6 +87,13 @@ class LocalizationsController < ApplicationController
     render json: @localization_factory.to_json
   end
   
+  def update_job
+    job = params[:job]
+    localization = Localization.find_by_job_id(job[:job_id])
+    localization.update_attributes(status: job[:status])
+    render text: "ok"
+  end
+  
   private
   
   def localizations_list
