@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://api.sandbox.gengo.com/v2/translate/jobs
+    body:
+      encoding: UTF-8
+      string: api_sig=fd74b7ecd4066b33dccfc14afc9bcad515f70405&api_key=Q3YJlTgT3%5EjI5P_%5EUJm9Au%5D6Ws9omzWs%5DThxZ8%29%7CbLyhxN%5Ba8%24HE5NuTk-JSqQBj&data=%7B%22jobs%22%3A%7B%22job_0%22%3A%7B%22type%22%3A%22text%22%2C%22slug%22%3A%22path.2%22%2C%22body_src%22%3A%22Any+value%22%2C%22lc_src%22%3A%22en%22%2C%22lc_tgt%22%3A%22de%22%2C%22tier%22%3A%22standard%22%2C%22auto_approve%22%3A%221%22%7D%2C%22job_1%22%3A%7B%22type%22%3A%22text%22%2C%22slug%22%3A%22path.3%22%2C%22body_src%22%3A%22other+value%22%2C%22lc_src%22%3A%22en%22%2C%22lc_tgt%22%3A%22de%22%2C%22tier%22%3A%22standard%22%2C%22auto_approve%22%3A%221%22%7D%7D%7D&ts=1424815174
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      - application/json
+      User-Agent:
+      - Gengo Ruby Library; Version 0.0.0; http://gengo.com/;
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 24 Feb 2015 21:59:34 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '728'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"opstat":"ok","response":{"jobs":{"job_0":[{"job_id":"1297101","slug":"path.1","body_src":"Any
+        value","lc_src":"en","lc_tgt":"de","unit_count":"2","tier":"standard","credits":"0.10","currency":"USD","status":"available","eta":25308,"ctime":1424804543,"callback_url":"http:\/\/104.131.160.243:3000\/lit\/gengo\/create\/","auto_approve":"1","body_tgt":"Einen
+        beliebigen Wert","mt":1}],"job_1":[{"job_id":"1297105","slug":"path.3","body_src":"other
+        value","lc_src":"en","lc_tgt":"de","unit_count":"2","tier":"standard","credits":"0.10","currency":"USD","status":"available","eta":25308,"ctime":1424807377,"callback_url":"http:\/\/104.131.160.243:3000\/lit\/gengo\/create\/","auto_approve":"1","body_tgt":"anderen
+        Wert","mt":1}]}}}'
+    http_version: 
+  recorded_at: Tue, 24 Feb 2015 21:59:36 GMT
+recorded_with: VCR 2.9.3
