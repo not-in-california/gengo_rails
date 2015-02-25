@@ -48,7 +48,7 @@ RSpec.describe TranslationPackage, type: :model do
       end
     
       it "set job id" do
-        expect(@localization.reload.job_id).to_not be_nil
+        expect(@localization.reload.job_id).not_to be_nil
       end
     end
   end
