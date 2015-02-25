@@ -25,7 +25,8 @@ RSpec.describe TranslationPackage, type: :class do
                                                       :lc_src => "en",
                                                       :lc_tgt => @localization.locale,
                                                       :tier => "standard",
-                                                      :auto_approve => "1"
+                                                      :auto_approve => "1",
+                                                      :callback_url => "http://requestb.in/1mscujf1"
                                                     }
                                                   }
                                                 })
