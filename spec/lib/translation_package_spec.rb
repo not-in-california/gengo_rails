@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TranslationPackage, type: :model do
+RSpec.describe TranslationPackage, type: :class do
   before do
     $gengo = Gengo::API.new({
       :public_key => "Q3YJlTgT3^jI5P_^UJm9Au]6Ws9omzWs]ThxZ8)|bLyhxN[a8$HE5NuTk-JSqQBj",
