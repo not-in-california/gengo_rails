@@ -34,6 +34,10 @@ RSpec.describe LocalizationsController, :type => :routing do
     it "routes to #import" do
       expect(:post => "/localizations/import").to route_to("localizations#import")
     end
+    
+    it "routes to #test_import" do
+      expect(:get => "/localizations/test_import").to route_to("localizations#test_import")
+    end
 
   end
 end

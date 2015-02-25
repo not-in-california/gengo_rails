@@ -1,0 +1,7 @@
+<%= form_tag(import_localizations_path) do %>
+  <%= text_area_tag :localizations_list %>
+  <%= submit_tag "Send", id: "test_import_submit" %>
+<% end %>
+
+<p>In order to import files, you need to send them in the following format:</p>
+<p><%= [{ value: "Value", path: "path.to.some.where", locale: "en" }].to_json %></p>
