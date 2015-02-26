@@ -1,9 +1,9 @@
 class TranslationPackage
   attr_reader :data
   
-  def initialize(localizations_ids)
+  def initialize(localizations)
     package = {jobs:{}}
-    @localizations = Localization.where(id: localizations_ids)
+    @localizations = localizations
     @localizations.each_with_index do |localization, i|
       package[:jobs].merge! "job_#{i}".to_sym => {
         type: "text",
@@ -27,7 +27,7 @@ class TranslationPackage
     end
   end
   
-  def self.create(localizations_ids)
-    new localizations_ids
+  def self.create(localizations)
+    new localizations
   end
 end

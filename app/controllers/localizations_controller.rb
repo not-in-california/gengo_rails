@@ -94,6 +94,13 @@ class LocalizationsController < ApplicationController
     render text: "ok"
   end
   
+  def send_to_gengo
+    @localizations = Localization.where(job_id: nil)
+    package = TranslationPackage.new(@localizations)
+    package.send_to_gengo
+    redirect_to localizations_path
+  end
+  
   private
   
   def localizations_list

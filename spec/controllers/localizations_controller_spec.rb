@@ -227,4 +227,40 @@ RSpec.describe LocalizationsController, :type => :controller do
       end
     end
   end
+  
+  describe "POST #send_to_gengo" do
+    context "without any filter" do
+      before do
+        @localizations = []
+        2.times { @localizations << create(:localization, data: {}) }
+        @localization = create(:localization, job_id: "123456")
+        @package = double('TranslationPackage')
+        allow(TranslationPackage).to receive(:new).and_return(@package)
+        allow(@package).to receive(:send_to_gengo)
+      end
+      
+      it "queries only translations without a job" do
+        post :send_to_gengo
+        expect(assigns(:localizations)).not_to include @localization
+      end
+      
+      it "calls new on TranslationPackage with selected locations" do
+        expect(TranslationPackage).to receive(:new).with(@localizations)
+        post :send_to_gengo
+      end
+      
+      it "calls send_to_gengo on package" do
+        expect(@package).to receive(:send_to_gengo)
+        post :send_to_gengo
+      end
+      
+      it "flash success message" do
+      end
+      
+      it "redirects to index" do
+        post :send_to_gengo
+        expect(response).to redirect_to localizations_path
+      end
+    end
+  end
 end

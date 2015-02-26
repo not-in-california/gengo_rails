@@ -13,7 +13,7 @@ RSpec.describe TranslationPackage, type: :class do
   describe "#create" do
     before do
       @localization = FactoryGirl.create(:localization, locale: "de")
-      @translation_package = TranslationPackage.create([@localization.id])
+      @translation_package = TranslationPackage.create([@localization])
     end
     
     it "create a proper package" do
@@ -38,7 +38,7 @@ RSpec.describe TranslationPackage, type: :class do
       before do
         @localization = FactoryGirl.create(:localization, locale: "de")
         @localization2 = FactoryGirl.create(:localization, locale: "de", value: "other value")
-        @translation_package = TranslationPackage.create([@localization.id, @localization2.id])
+        @translation_package = TranslationPackage.create([@localization, @localization2])
         VCR.use_cassette("translation_package/send_to_gengo") do
           @translation_package.send_to_gengo
         end
