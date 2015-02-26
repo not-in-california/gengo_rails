@@ -19,4 +19,11 @@ class LocalizationFactory
     end
     return self
   end
+  
+  def self.export(opts = {})
+    allowed_scopes = [:locale, :path, :value]
+    opts = opts.delete_if { |key, value| !allowed_scopes.include?(key) }
+    opts.merge!(status: "approved")
+    Localization.where(opts).all
+  end
 end
