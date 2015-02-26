@@ -2,9 +2,12 @@
 
 <table>
   <tr>
+    <th>Locale</th>
     <th>Path</th>
     <th>Value</th>
-    <th>Locale</th>
+    <th>Job ID</th>
+    <th>Status</td>
+    <th>Translated Value</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +15,12 @@
 
 <% @localizations.each do |localization| %>
   <tr>
+    <td><%= localization.locale %></td>
     <td><%= localization.path %></td>
     <td><%= localization.value %></td>
-    <td><%= localization.locale %></td>
+    <td><%= localization.job_id %></td>
+    <td><%= localization.status %></td>
+    <td><%= localization.translated_value %>
     <td><%= link_to 'Show', localization %></td>
     <td><%= link_to 'Edit', edit_localization_path(localization) %></td>
     <td><%= link_to 'Destroy', localization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
