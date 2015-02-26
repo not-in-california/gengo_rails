@@ -10,12 +10,23 @@ RSpec.describe Localization, :type => :model do
   end
   
   describe "#translated_value" do
+    context "data is not empty" do
+      before do
+        @localization = create(:localization)
+      end
+  
+      it "aliases to body_tgt (translated_value)" do
+        expect(@localization.translated_value).to eq @localization.data["body_tgt"]
+      end
+    end
+  end
+  
+  context "data is empty" do
     before do
-      @localization = FactoryGirl.create(:localization)
+      @localization = create(:localization, data: nil)
     end
     
-    it "aliases to body_tgt (translated_value)" do
-      expect(@localization.translated_value).to eq @localization.data["body_tgt"]
+    it "it returns nil" do
     end
   end
 end
