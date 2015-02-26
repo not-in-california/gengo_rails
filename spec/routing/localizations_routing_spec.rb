@@ -40,7 +40,7 @@ RSpec.describe LocalizationsController, :type => :routing do
     end
 
     it "routes to #update_job" do
-      expect(:post => "/localizations/update_job").to route_to("localizations#update_job")
+      expect(:post => "/gengo/localizations/update_job").to route_to("localizations#update_job")
     end
   end
 end
