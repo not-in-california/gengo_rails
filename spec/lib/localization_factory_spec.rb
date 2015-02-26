@@ -59,4 +59,37 @@ RSpec.describe LocalizationFactory do
       end
     end
   end
+  
+  describe "export" do
+    before do
+      2.times { create(:localization, status: "approved") }
+      2.times { create(:localization, status: "new") }
+      2.times { create(:localization) }
+    end
+    
+    it "should get only approved localizations by default" do
+      expect(LocalizationFactory.export).to eq(Localization.where(status: "approved").all)
+    end
+    
+    it "should allow to filter by locale" do
+      2.times { create(:localization, status: "approved", locale: "pt")}
+      expect(LocalizationFactory.export(locale: "en")).to eq(Localization.where(status: "approved").where(locale: "en").all)
+    end
+    
+    it "should allow to filter by path" do
+      2.times { |i| create(:localization, status: "approved", path: "path.to...", locale: "l#{i}")}
+      expect(LocalizationFactory.export(path: "path.to...")).to eq(Localization.where(status: "approved").where(path: "path.to...").all)
+    end
+    
+    it "should allow to filter by value" do
+      2.times { create(:localization, status: "approved", value: "val")}
+      expect(LocalizationFactory.export(value: "val")).to eq(Localization.where(status: "approved").where(value: "val").all)
+    end
+    
+    it "should not allow to filter by other fields" do
+      t = Time.now
+      2.times { create(:localization, status: "approved", updated_at: t)}
+      expect(LocalizationFactory.export(updated_at: t)).to eq(Localization.where(status: "approved").all)
+    end
+  end
 end
