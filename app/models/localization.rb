@@ -6,6 +6,8 @@ class Localization < ActiveRecord::Base
   validates :locale, :path, :value, presence: true
   validates :path, uniqueness: { scope: :locale }
   
+  scope :approved, ->{ where(status: "approved") }
+  
   def translated_value
     data["body_tgt"]
   end

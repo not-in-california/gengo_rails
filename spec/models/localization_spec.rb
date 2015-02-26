@@ -18,4 +18,15 @@ RSpec.describe Localization, :type => :model do
       expect(@localization.translated_value).to eq @localization.data["body_tgt"]
     end
   end
+  
+  context "scopes" do
+    describe "approved" do
+      it "should return only approved ones" do
+        @localization = create(:localization, status: "approved")
+        create(:localization, status: "new")
+        create(:localization, status: nil)
+        expect(Localization.approved).to match_array([@localization])
+      end
+    end
+  end
 end
