@@ -1,7 +1,7 @@
 class TranslationPackage
   attr_reader :data
   
-  def initialize(localizations)
+  def initialize(localizations, callback_url)
     package = {jobs:{}}
     @localizations = localizations
     @localizations.each_with_index do |localization, i|
@@ -13,7 +13,7 @@ class TranslationPackage
         lc_tgt: localization.locale,
         tier: "standard",
         auto_approve: "1",
-        callback_url: "http://requestb.in/1bcnaq81"
+        callback_url: callback_url
       }
     end
     @data = package
@@ -27,7 +27,7 @@ class TranslationPackage
     end
   end
   
-  def self.create(localizations)
-    new localizations
+  def self.create(localizations, callback_url)
+    new localizations, callback_url
   end
 end

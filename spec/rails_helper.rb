@@ -44,6 +44,8 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
   config.include FactoryGirl::Syntax::Methods
+  config.include Rails.application.routes.url_helpers
+  Rails.application.routes.default_url_options[:host] = 'test.host'
 end
 
 VCR.configure do |config|

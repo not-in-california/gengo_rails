@@ -245,7 +245,7 @@ RSpec.describe LocalizationsController, :type => :controller do
       end
       
       it "calls new on TranslationPackage with selected locations" do
-        expect(TranslationPackage).to receive(:new).with(@localizations)
+        expect(TranslationPackage).to receive(:new).with(@localizations, update_job_localizations_url)
         post :send_to_gengo
       end
       

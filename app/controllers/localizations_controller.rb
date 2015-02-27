@@ -96,7 +96,7 @@ class LocalizationsController < ApplicationController
   
   def send_to_gengo
     @localizations = Localization.where(job_id: nil)
-    package = TranslationPackage.new(@localizations)
+    package = TranslationPackage.new(@localizations, update_job_localizations_url)
     package.send_to_gengo
     redirect_to localizations_path
   end
