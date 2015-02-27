@@ -13,7 +13,7 @@ RSpec.describe TranslationPackage, type: :class do
   describe "#create" do
     before do
       @localization = FactoryGirl.create(:localization, locale: "de")
-      @translation_package = TranslationPackage.create([@localization.id])
+      @translation_package = TranslationPackage.create([@localization], update_job_localizations_url)
     end
     
     it "create a proper package" do
@@ -26,7 +26,7 @@ RSpec.describe TranslationPackage, type: :class do
                                                       :lc_tgt => @localization.locale,
                                                       :tier => "standard",
                                                       :auto_approve => "1",
-                                                      :callback_url => "http://requestb.in/1mscujf1"
+                                                      :callback_url => update_job_localizations_url
                                                     }
                                                   }
                                                 })
@@ -38,7 +38,7 @@ RSpec.describe TranslationPackage, type: :class do
       before do
         @localization = FactoryGirl.create(:localization, locale: "de")
         @localization2 = FactoryGirl.create(:localization, locale: "de", value: "other value")
-        @translation_package = TranslationPackage.create([@localization.id, @localization2.id])
+        @translation_package = TranslationPackage.create([@localization, @localization2], update_job_localizations_url)
         VCR.use_cassette("translation_package/send_to_gengo") do
           @translation_package.send_to_gengo
         end

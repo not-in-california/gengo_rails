@@ -1,9 +1,9 @@
 class TranslationPackage
   attr_reader :data
   
-  def initialize(localizations_ids)
+  def initialize(localizations, callback_url)
     package = {jobs:{}}
-    @localizations = Localization.where(id: localizations_ids)
+    @localizations = localizations
     @localizations.each_with_index do |localization, i|
       package[:jobs].merge! "job_#{i}".to_sym => {
         type: "text",
@@ -13,7 +13,7 @@ class TranslationPackage
         lc_tgt: localization.locale,
         tier: "standard",
         auto_approve: "1",
-        callback_url: "http://requestb.in/1mscujf1"
+        callback_url: callback_url
       }
     end
     @data = package
@@ -27,7 +27,7 @@ class TranslationPackage
     end
   end
   
-  def self.create(localizations_ids)
-    new localizations_ids
+  def self.create(localizations, callback_url)
+    new localizations, callback_url
   end
 end
