@@ -26,6 +26,7 @@ RSpec.describe TranslationPackage, type: :class do
                                                       :lc_tgt => @localization.locale,
                                                       :tier => "standard",
                                                       :auto_approve => "1",
+                                                      :custom_data => @localization.id.to_s,
                                                       :callback_url => update_job_localizations_url
                                                     }
                                                   }
@@ -39,17 +40,13 @@ RSpec.describe TranslationPackage, type: :class do
         @localization = FactoryGirl.create(:localization, locale: "de")
         @localization2 = FactoryGirl.create(:localization, locale: "de", value: "other value")
         @translation_package = TranslationPackage.create([@localization, @localization2], update_job_localizations_url)
+      end
+    
+      it "delegate to gengo postTranslationJobs" do
+        expect($gengo).to receive(:postTranslationJobs).with(@translation_package.data)
         VCR.use_cassette("translation_package/send_to_gengo") do
           @translation_package.send_to_gengo
         end
-      end
-    
-      it "change job status" do
-        expect(@localization.reload.status).to eql "available"
-      end
-    
-      it "set job id" do
-        expect(@localization.reload.job_id).not_to be_nil
       end
     end
   end

@@ -88,9 +88,9 @@ class LocalizationsController < ApplicationController
   end
   
   def update_job
-    job = params[:job]
-    localization = Localization.find_by_job_id(job[:job_id])
-    localization.update_attributes(status: job[:status], data: job)
+    job = JSON.parse(params[:job])
+    localization = Localization.find_by_id(job["custom_data"])
+    localization.update_attributes(status: job["status"], job_id: job["job_id"], data: job)
     render text: "ok"
   end
   

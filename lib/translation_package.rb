@@ -13,6 +13,7 @@ class TranslationPackage
         lc_tgt: localization.locale,
         tier: "standard",
         auto_approve: "1",
+        custom_data: localization.id.to_s,
         callback_url: callback_url
       }
     end
@@ -20,11 +21,7 @@ class TranslationPackage
   end
   
   def send_to_gengo
-    @response = $gengo.postTranslationJobs(self.data)
-    @localizations.each_with_index do |localization, i|
-      job = @response["response"]["jobs"]["job_#{i}"][0]
-      localization.update_attributes(status: job["status"], job_id: job["job_id"])
-    end
+    $gengo.postTranslationJobs(self.data)
   end
   
   def self.create(localizations, callback_url)
