@@ -28,7 +28,7 @@
   <%= link_to 'New Localization', new_localization_path, class: "btn btn-primary" %>
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-green" data-toggle="modal" data-target="#myModal">
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
     Send to Gengo
   </button>
 
@@ -38,15 +38,15 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Send to Gengo</h4>
+          <h4 class="modal-title" id="myModalLabel">Send to Gengo?</h4>
         </div>
         <div class="modal-body">
           <h4>You have selected <%= @localizations.count %> keys to send to Gengo.</h4>
-        
+          <div class="alert alert-warning" role="alert"><strong>Warning!</strong> This action can not be undone!</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <%= link_to 'Send', send_to_gengo_localizations_path, method: :post, class: "btn btn-primary" %>
+          <%= link_to 'Send', send_to_gengo_localizations_path, method: :post, class: "btn btn-success" %>
         </div>
       </div>
     </div>
